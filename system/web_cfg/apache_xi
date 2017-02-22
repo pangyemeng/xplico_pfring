@@ -1,0 +1,34 @@
+Listen 9876
+
+<VirtualHost *:9876>
+    DocumentRoot /opt/xplico/xi/
+    <Directory "/opt/xplico/xi/">
+        Options All
+        AllowOverride All
+        DirectoryIndex index.html index.php
+        php_admin_value open_basedir /opt/xplico/xi:/opt/xplico:/run:/tmp:/usr/bin:/etc/php/:/etc/php5/
+        php_admin_value post_max_size 500M
+        php_admin_value upload_max_filesize 500M
+        php_admin_value short_open_tag  On
+        php_admin_value date.timezone  US/Eastern
+        RewriteEngine On
+        Require all granted
+    </Directory>
+
+    ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+            <Directory "/usr/lib/cgi-bin">
+                    AllowOverride All
+                    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+                    Require local
+            </Directory>
+
+
+    ErrorLog /var/log/apache2/xplico_error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel debug
+
+    CustomLog /var/log/apache2/xplico_access.log combined
+
+</VirtualHost>

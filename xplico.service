@@ -1,0 +1,13 @@
+[Unit]
+Description=Xplico
+After=network.target syslog.target
+
+[Service]
+Type=forking
+PrivateTmp=true
+ExecStart=/opt/xplico/bin/dema -d /opt/xplico -b sqlite
+Restart=always
+PIDFile=/var/run/dema.pid
+
+[Install]
+WantedBy=multi-user.target

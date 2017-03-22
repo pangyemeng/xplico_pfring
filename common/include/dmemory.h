@@ -27,7 +27,7 @@
 #define __DMEMORY_H__
 
 #include <stdlib.h>
-
+#include <gperftools/tcmalloc.h>
 #include "configs.h"
 
 void *XMalloc(size_t size, const char *function, int line);
@@ -42,16 +42,22 @@ char *XStrcpy(char *dest, const char *src, const char *function, int line);
 # define xfree(ptr)              XFree(ptr, __FUNCTION__, __LINE__)
 # define xrealloc(ptr, size)     XRealloc(ptr, size, __FUNCTION__, __LINE__)
 # define xmemcpy(dest, src, n)   XMemcpy(dest, src, n, __FUNCTION__, __LINE__)
-# define xstrcpy(dest, src)      XStrcpy(dest, src, __FUNCTION__, __LINE__)
-#else
-# define xmalloc(size)           malloc(size)
-# define xcalloc(num, size)      calloc(num, size)
-# define xfree(ptr)              free(ptr)
-# define xrealloc(ptr, size)     realloc(ptr, size)
+# define xstrcpy(dest, src)      XStrcpy(dest, src, __FUNCTION__, __LINE__
+#elif TC_MALLOC
+# define xmalloc(size)           tc_malloc(size)
+# define xcalloc(num, size)      tc_calloc(num, size)
+# define xfree(ptr)              tc_free(ptr)
+# define xrealloc(ptr, size)     tc_realloc(ptr, size)
 # define xmemcpy(dest, src, n)   memcpy(dest, src, n)
 # define xstrcpy(dest, src)      strcpy(dest, src);
+#else
+	# define xmalloc(size)           malloc(size)
+	# define xcalloc(num, size)      calloc(num, size)
+	# define xfree(ptr)              free(ptr)
+	# define xrealloc(ptr, size)     realloc(ptr, size)
+	# define xmemcpy(dest, src, n)   memcpy(dest, src, n)
+	# define xstrcpy(dest, src)      strcpy(dest, src);
 #endif
-
 
 #if XP_MEM_SPEED
 int DMemInit(void);

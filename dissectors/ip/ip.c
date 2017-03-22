@@ -42,7 +42,7 @@
 #include "ip_frag.h"
 
 #define GTP_MSG_TPDU                0xFF
-
+#define XPL_DIS_IP_CHECKSUM 1
 /* info id */
 static int iphdr_len;
 static int prot_id;

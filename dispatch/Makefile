@@ -27,7 +27,7 @@
 SUBDIRS = none cli lite pcap2wav capostgres ximysql
 
 # log dispatcer flags
-CFLAGS += -DLOG_COMPONENT=-3
+CFLAGS += -DLOG_COMPONENT=-3 -ltcmalloc
 
 # src file
 SRC = dispatch.c disp_manipula.c gearth.c

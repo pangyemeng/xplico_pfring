@@ -41,7 +41,7 @@ OBJ = $(SRC:.c=.o)
 DEP = ../core/mmain.c mpei.c analyse.c
 
 # compilation
-LDFLAGS =  -L$(ROOT_DIR) -ldl -lpthread -lz -lssl -lcrypto $(shell pkg-config --libs json-c)
+LDFLAGS =  -L$(ROOT_DIR) -ldl -lpthread -lz -lssl -lcrypto $(shell pkg-config --libs json-c) -ltcmalloc
 
 # cflags
 CFLAGS += -I./include $(shell pkg-config --cflags json-c)

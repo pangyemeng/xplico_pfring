@@ -37,8 +37,8 @@
 #define XP_CAPTURE_UTC            0
 #define XP_DEFAULT_CFG            "config/xplico_cli.cfg"
 /* memory debug and speed */
-#define XP_MEM_DEBUG              1
-#define XP_MEM_SPEED              0
+#define XP_MEM_DEBUG            0
+#define XP_MEM_SPEED             0
 /* tcp ack elaboration */
 #define TCP_ENABLE_TCP_ACK        1
 

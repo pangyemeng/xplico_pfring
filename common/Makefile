@@ -29,6 +29,8 @@ SUBDIRS =
 # log core flags
 CFLAGS += -DLOG_COMPONENT=-1
 
+CFLAGS += -ltcmalloc
+
 # src file
 SRC = dmemory.c log.c flow.c dis_mod.c config_param.c field_types.c prot.c \
 	packet.c fthread.c grp_flows.c grp_rule.c strutil.c embedded.c link.c \
